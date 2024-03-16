@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Coming soon...</h3>
+        <h1>Our new brand<br> Website is on it's way</h1>
+        <p>subscribe for more details</p>
+        <form name="submit-to-google-sheet">
+            <input type="email" name="Email" placeholder="Your email id" required>
+            <button type="submit"><i class="fa-regular fa-paper-plane"></i></button>
+        </form>
+        <span id="success"></span>
+    </div>
+    <form name="submit-to-google-sheet">
+        <input name="email" type="email" placeholder="Email" required>
+        <button type="submit">Send</button>
+      </form>
+      
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbydLbOkauKhe0bwGu8kQ0BVT6nL-7EpZrec08ABT7gaJ61mUkJCgXZVynyhLGMK2pQkAA/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg =document.getElementById("success");      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Thanl you for subscribing!"
+                setInterval(function(){
+                    msg.innerHTML = "";
+                },5000)
+                form.reset();
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+    <script src="index.js"></script>
+</body>
+</html>
